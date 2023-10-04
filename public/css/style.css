@@ -3674,3 +3674,14 @@ textarea {
  } .mrt-170{
      margin-top:170px;
  }
+
+.center{
+    text-align: center;
+}
+.invalid-feedback{
+    color: red;
+    font-size: 14px;
+}
+.is-invalid{
+    border: 1px solid red;
+}
