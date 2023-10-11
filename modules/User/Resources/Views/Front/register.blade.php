@@ -1,4 +1,4 @@
-@extends('auth.master')
+@extends('User::Front.master')
 @section('content')
 <form action="" class="form" method="post">
     <a class="account-logo" href="index.html">
@@ -33,7 +33,7 @@
 
             <input type="password" class="txt txt-l @error('password') is-invalid @enderror" placeholder="رمز عبور *"
                name="password" required autocomplete="new-password">
-            <input type="password" class="txt txt-l" placeholder="تکرار رمز عبور *"
+            <input type="password" class="txt txt-l @error('password') is-invalid @enderror" placeholder="تکرار رمز عبور *"
                name="password_confirmation" required autocomplete="new-password">
             <span class="rules">رمز عبور باید حداقل ۶ کاراکتر و ترکیبی از حروف بزرگ، حروف کوچک، اعداد و کاراکترهای غیر الفبا مانند !@#$%^&*() باشد.</span>
             @error('password')
@@ -44,9 +44,9 @@
             <br>
             <button class="btn continue-btn">ثبت نام و ادامه</button>
         </form>
-    </div>
-    <div class="form-footer">
-        <a href="{{route('login')}}">صفحه ورود</a>
+        <div class="form-footer">
+            <a href="{{route('login')}}">صفحه ورود</a>
+        </div>
     </div>
 </form>
 @endsection
