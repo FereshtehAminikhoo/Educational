@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Feature;
+namespace User\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use User\Models\User;
 
