@@ -29,9 +29,9 @@ Route::get('/test', function(){
     dd($url);
 });*/
 
-Route::get('/test', function () {
+/*Route::get('/test', function () {
     return new \User\Mail\VerifyCodeMail(\User\Models\User::first(),32454);
-});
+});*/
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
