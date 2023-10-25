@@ -5,8 +5,9 @@ namespace User\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use User\Mail\VerifyCodeMail;
+use User\Services\VerifyCodeService;
 
-class VerifyMail extends Notification
+class VerifyMailNotification extends Notification
 {
     use Queueable;
 
@@ -39,12 +40,11 @@ class VerifyMail extends Notification
      */
     public function toMail($notifiable)
     {
-        $code = random_int(100000,999999);
-        cache()->set('verify_code' . $notifiable->id, $code, now()->addDay());
+        $code = VerifyCodeService::generate();
+        VerifyCodeService::store($notifiable->id, $code);
 
         return (new VerifyCodeMail($notifiable, $code))
-            ->to($notifiable->email)
-            ->subject('وب آموز | کد فعال سازی');
+            ->to($notifiable->email);
     }
 
     /**
