@@ -3,8 +3,8 @@
 namespace User\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use User\Mail\VerifyCodeMail;
 
 class VerifyMail extends Notification
 {
@@ -35,18 +35,16 @@ class VerifyMail extends Notification
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return VerifyCodeMail
      */
     public function toMail($notifiable)
     {
         $code = random_int(100000,999999);
         cache()->set('verify_code' . $notifiable->id, $code, now()->addDay());
 
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->line('your code is: '. $code)
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return (new VerifyCodeMail($notifiable, $code))
+            ->to($notifiable->email)
+            ->subject('وب آموز | کد فعال سازی');
     }
 
     /**
