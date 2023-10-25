@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/verify-link/{user}/', function(){
+/*Route::get('/verify-link/{user}/', function(){
     if (request()->hasValidSignature()){
         return 'ok';
     }
@@ -27,6 +27,11 @@ Route::get('/verify-link/{user}/', function(){
 Route::get('/test', function(){
     $url = URL::temporarySignedRoute('verify-link', now()->addSeconds(20), ['user' => 5]);
     dd($url);
+});*/
+
+Route::get('/test', function () {
+    return new \User\Mail\VerifyCodeMail(\User\Models\User::first(),32454);
 });
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
