@@ -19,7 +19,7 @@ Route::group([
     //logout route
     Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
 
-    //reset password route
+    //reset password routes
     Route::get('/password/reset', 'Auth\ForgotPasswordController@showVerifyCodeRequestForm')->name('password.request');
     Route::get('/password/reset/send', 'Auth\ForgotPasswordController@sendVerifyCodeEmail')->name('password.sendVerifyCodeEmail');
     Route::post('/password/reset/check-verify-code', 'Auth\ForgotPasswordController@checkVerifyCode')->name('password.checkVerifyCode')
@@ -27,9 +27,6 @@ Route::group([
     Route::get('/password/change', 'Auth\ResetPasswordController@showResetForm')->name('password.showResetForm')
         ->middleware('auth');
     Route::post('/password/change', 'Auth\ResetPasswordController@reset')->name('password.update');
-    Route::get('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-
-
 
     //register routes
     Route::post('/register', 'Auth\RegisterController@register')->name('register');
