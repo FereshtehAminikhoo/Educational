@@ -163,8 +163,8 @@
                 <!--                                    </div>-->
                 <!--                                </div>-->
                 <div class="login-register-btn ">
-                    <div><a class="btn-login" href="login.html">ورود</a></div>
-                    <div><a class="btn-register" href="register.html">ثبت نام</a></div>
+                    <div><a class="btn-login" href="{{route('login')}}">ورود</a></div>
+                    <div><a class="btn-register" href="{{route('register')}}">ثبت نام</a></div>
                 </div>
 
             </div>
