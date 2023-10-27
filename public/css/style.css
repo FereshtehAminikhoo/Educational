@@ -2175,6 +2175,11 @@ footer {
     margin-bottom: 35px;
 }
 
+.code-resend{
+    display: flex;
+    justify-content: center;
+}
+
 .form-footer {
     position: absolute;
     bottom: 0;
