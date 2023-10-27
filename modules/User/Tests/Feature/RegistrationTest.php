@@ -3,12 +3,16 @@
 namespace User\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use User\Models\User;
+use User\Services\VerifyCodeService;
 
 class RegistrationTest extends TestCase
 {
     use RefreshDatabase;
+
+
     /**
      * A basic feature test example.
      *
@@ -37,6 +41,28 @@ class RegistrationTest extends TestCase
 
         $response = $this->get(route('home'));
         $response->assertRedirect(route('verification.notice'));
+    }
+
+    public function test_user_can_verify_account()
+    {
+        $user = User::create([
+            'name'=>'test1',
+            'email'=>'test1@gmail.com',
+            'password'=>bcrypt('Aa123456@')
+        ]);
+
+        $code = VerifyCodeService::generate();
+        VerifyCodeService::store($user->id, $code);
+
+        auth()->loginUsingId($user->id);
+        $this->assertAuthenticated();
+
+        $this->post(route('verification.verify'), [
+            'verify_code' => $code
+        ]);
+
+        $this->assertEquals(true, $user->fresh()->hasVerifiedEmail());
+
     }
 
     public function test_verified_user_can_see_home_page()
