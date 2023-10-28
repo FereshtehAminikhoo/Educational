@@ -51,7 +51,7 @@ class ForgotPasswordController extends Controller
         // check if exists in database
         $user = resolve(UserRepo::class)->findByEmail($request);
 
-        if(VerifyCodeService::check($user->id, $request->verify_code)){
+        if($user && VerifyCodeService::check($user->id, $request->verify_code)){
            auth()->loginUsingId($user->id);
            return redirect() -> route('password.showResetForm');
         }
