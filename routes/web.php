@@ -17,21 +17,11 @@ Route::get('/', function () {
     return view('index');
 });
 
-/*Route::get('/verify-link/{user}/', function(){
-    if (request()->hasValidSignature()){
-        return 'ok';
-    }
-    return 'Failed';
-})->name('verify-link');
-
-Route::get('/test', function(){
-    $url = URL::temporarySignedRoute('verify-link', now()->addSeconds(20), ['user' => 5]);
-    dd($url);
-});*/
-
-/*Route::get('/test', function () {
-    return new \User\Mail\VerifyCodeMail(\User\Models\User::first(),32454);
-});*/
+Route::get('/test', function () {
+   // \Spatie\Permission\Models\Permission::create(['name' => 'teach']);
+   //auth()->user()->givePermissionTo(\RolePermissions\Models\Permission::PERMISSION_SUPER_ADMIN);
+   return auth()->user()->permissions;
+});
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
