@@ -3,6 +3,7 @@
 namespace User\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Category\Repositories\CategoryRepo;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use User\Http\Requests\ResetPasswordVerifyCodeRequest;
@@ -27,6 +28,13 @@ class ForgotPasswordController extends Controller
 
     use SendsPasswordResetEmails;
 
+    private $repository;
+
+    public function __construct(UserRepo $userRepo)
+    {
+        $this->repository = $userRepo;
+    }
+
 
     public function showVerifyCodeRequestForm()
     {
@@ -36,7 +44,7 @@ class ForgotPasswordController extends Controller
     public function sendVerifyCodeEmail(sendResetPasswordVerifyCodeRequest $request)
     {
         // check if exists in database
-        $user = resolve(UserRepo::class)->findByEmail($request);
+        $user = $this->repository->findByEmail($request);
 
         if ($user && ! VerifyCodeService::has($user->id)){
             $user -> sendResetPasswordRequestNotification();
