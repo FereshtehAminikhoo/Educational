@@ -11,8 +11,16 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
+
+    public static $seeders = [];
+
+
     public function run()
     {
+        foreach(self::$seeders as $seeder){
+            $this->call($seeder);
+        }
+
         // \App\Models\User::factory(10)->create();
     }
 }
