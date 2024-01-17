@@ -2,6 +2,7 @@
 
 namespace User\Repositories;
 
+use RolePermissions\Models\Permission;
 use User\Models\User;
 
 class UserRepo
@@ -9,5 +10,15 @@ class UserRepo
     public function findByEmail($email)
     {
         return User::query()->where('email', $email)->first();
+    }
+
+    public function getTeachers()
+    {
+        return User::permission(Permission::PERMISSION_TEACH)->get();
+    }
+
+    public function findById($id)
+    {
+        return User::findOrFail($id);
     }
 }
