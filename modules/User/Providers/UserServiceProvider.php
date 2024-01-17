@@ -2,7 +2,7 @@
 
 namespace User\Providers;
 
-use \Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use User\Models\User;
 
 class UserServiceProvider extends ServiceProvider
