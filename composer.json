@@ -32,6 +32,7 @@
             "RolePermissions\\": "modules/RolePermissions/",
             "Course\\": "modules/Course/",
             "Media\\": "modules/Media/",
+            "Common\\": "modules/Common/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
