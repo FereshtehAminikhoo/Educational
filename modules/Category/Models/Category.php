@@ -2,6 +2,7 @@
 
 namespace Category\Models;
 
+use Course\Models\Course;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends model
@@ -28,6 +29,11 @@ class Category extends model
     public function getParentAttribute()
     {
         return (is_null($this->parent_id)) ? 'ندارد' : $this->parentCategory->title;
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 
 
