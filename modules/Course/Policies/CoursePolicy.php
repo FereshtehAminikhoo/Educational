@@ -41,11 +41,13 @@ class CoursePolicy
     public function delete($user)
     {
         if($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) return true;
+        return null;
     }
 
     public function change_confirmation_status($user)
     {
         if($user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)) return true;
+        return null;
     }
 
 
