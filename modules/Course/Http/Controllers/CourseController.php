@@ -63,6 +63,7 @@ class CourseController extends Controller
     public function update($id, CourseRequest $request)
     {
         $course = $this->repository->findById($id);
+        $this->authorize('edit', $course);
         if($request->hasFile('image')){
             $request->request->add(['banner_id' => MediaFileService::upload($request->file('image'))->id]);
             if ($course->banner)
@@ -78,6 +79,7 @@ class CourseController extends Controller
     public function destroy($courseId)
     {
         $course = $this->repository->findById($courseId);
+        $this->authorize('delete', $course);
         if($course->banner){
             $course->banner->delete();
         }
@@ -87,6 +89,7 @@ class CourseController extends Controller
 
     public function accept($courseId)
     {
+        $this->authorize('change_confirmation_status', Course::class);
         if($this->repository->updateConfirmationStatus($courseId, Course::CONFIRMATION_STATUS_ACCEPTED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -95,6 +98,7 @@ class CourseController extends Controller
 
     public function reject($courseId)
     {
+        $this->authorize('change_confirmation_status', Course::class);
         if($this->repository->updateConfirmationStatus($courseId, Course::CONFIRMATION_STATUS_REJECTED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -103,6 +107,7 @@ class CourseController extends Controller
 
     public function lock($courseId)
     {
+        $this->authorize('change_confirmation_status', Course::class);
         if($this->repository->updateStatus($courseId, Course::STATUS_LOCKED)){
             return AjaxResponses::SuccessResponse();
         }
