@@ -2,6 +2,7 @@
 
 namespace Course\Models;
 
+use Category\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Media\Models\Media;
@@ -52,5 +53,10 @@ class Course extends Model
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id', 'id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }
