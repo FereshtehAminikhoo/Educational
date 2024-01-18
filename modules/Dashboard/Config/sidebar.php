@@ -5,6 +5,7 @@ return [
         'dashboard' => [],
         'categories' => [],
         'role-permissions' => [],
-        'courses' => []
+        'courses' => [],
+        'users' => []
     ]
 ];
