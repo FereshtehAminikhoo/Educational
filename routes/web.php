@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::get('/test', function () {
    // \Spatie\Permission\Models\Permission::create(['name' => 'teach']);
    //auth()->user()->givePermissionTo(\RolePermissions\Models\Permission::PERMISSION_SUPER_ADMIN);
-   return auth()->user()->permissions;
+   return auth()->user()->assignRole('teacher');
 });
 
 
