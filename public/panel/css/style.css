@@ -1903,4 +1903,7 @@ span.tagRemove:hover {
 .dropdown-select{
     margin-top: 15px;
 }
+.delete-list-item:hover .item-delete{
+    display: inline-block;
+}
 
