@@ -33,6 +33,9 @@ Route::group([
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
 
+    //panel routes
+    Route::resource('/users', 'UserController');
+    Route::post('/users/{user}/add/role', 'UserController@addRole')->name('users.addRole');
 
 
 
