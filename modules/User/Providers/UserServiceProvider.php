@@ -2,14 +2,17 @@
 
 namespace User\Providers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use User\Models\User;
+use User\Policies\UserPolicy;
 
 class UserServiceProvider extends ServiceProvider
 {
     public function register()
     {
         config()->set('auth.providers.users.model', User::class);
+        Gate::policy(User::class, UserPolicy::class);
     }
     public function boot()
     {
