@@ -36,6 +36,7 @@ Route::group([
     //panel routes
     Route::resource('/users', 'UserController');
     Route::post('/users/{user}/add/role', 'UserController@addRole')->name('users.addRole');
+    Route::delete('/users/{user}/remove/{role}/role', 'UserController@removeRole')->name('users.removeRole');
 
 
 

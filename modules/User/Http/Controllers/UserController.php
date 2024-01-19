@@ -3,6 +3,7 @@
 namespace User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Common\Responses\AjaxResponses;
 use RolePermissions\Repositories\RoleRepo;
 use User\Http\Requests\AddRoleRequest;
 use User\Models\User;
@@ -37,5 +38,13 @@ class UserController extends Controller
         $user->assignRole($request->role);
         newFeedback('موفقیت آمیز',  " نقش کاربری {$request->role} به کاربر {$user->name} داده شد ", 'success' );
         return back();
+    }
+
+    public function removeRole($userId, $role)
+    {
+        $this->authorize('removeRole', User::class);
+        $user = $this->repository->findById($userId);
+        $user->removeRole($role);
+        return AjaxResponses::SuccessResponse();
     }
 }
