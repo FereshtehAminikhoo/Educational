@@ -181,6 +181,7 @@ return [
         \RolePermissions\Providers\RolePermissionsServiceProvider::class,
         \Course\Providers\CourseServiceProvider::class,
         \Media\Providers\MediaServiceProvider::class,
+        \Common\Providers\CommonServiceProvider::class,
 
     ],
 
