@@ -1,6 +1,6 @@
 <?php
 
-function newFeedback($title, $body, $type){
+function newFeedback($title = 'عملیات موفقیت آمیز', $body = 'عملیات با موفقیت انجام شد', $type = 'success'){
     if(session()->has('feedbacks'))
         $session = session()->get('feedbacks');
     else
