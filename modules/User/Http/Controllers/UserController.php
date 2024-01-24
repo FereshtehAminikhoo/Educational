@@ -58,6 +58,22 @@ class UserController extends Controller
         return redirect(route('users.index'));
     }
 
+    public function destroy($userId)
+    {
+        $this->authorize('delete', User::class);
+        $user = $this->repository->findById($userId);
+        $user->delete();
+        return AjaxResponses::SuccessResponse();
+    }
+
+    public function manualVerify($userId)
+    {
+        $this->authorize('manualVerify', User::class);
+        $user = $this->repository->findById($userId);
+        $user->markEmailAsVerified();
+        return AjaxResponses::SuccessResponse();
+    }
+
     public function addRole(AddRoleRequest $request, User $user)
     {
         $this->authorize('addRole', User::class);
