@@ -2,8 +2,10 @@
 
 namespace RolePermissions\Providers;
 
+use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use RolePermissions\Database\Seeds\RolePermissionTableSeeder;
 use RolePermissions\Models\Permission;
 use RolePermissions\Models\Role;
 use RolePermissions\Policies\RolePermissionsPolicy;
@@ -16,8 +18,9 @@ class RolePermissionsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'RolePermissions');
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
-        Gate::policy(Role::class, RolePermissionsPolicy::class);
+        DatabaseSeeder::$seeders[] = RolePermissionTableSeeder::class;
 
+        Gate::policy(Role::class, RolePermissionsPolicy::class);
         Gate::before(function($user){
             return $user->hasPermissionTo(Permission::PERMISSION_SUPER_ADMIN) ? true : null;
         });
