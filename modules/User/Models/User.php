@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Media\Models\Media;
+use RolePermissions\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use User\Notifications\ResetPasswordRequestNotification;
 use User\Notifications\VerifyMailNotification;
@@ -27,6 +28,16 @@ class User extends Authenticatable implements MustVerifyEmail
     const STATUS_INACTIVE = 'inactive';
     const STATUS_BAN = 'ban';
     static $statuses = [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_BAN];
+
+
+    static $defaultUsers = [
+        [
+            'email' => 'admin@gmail.com',
+            'password' => 'demo',
+            'name' => 'Admin',
+            'role' => Role::ROLE_SUPER_ADMIN
+        ],
+    ];
 
 
 
