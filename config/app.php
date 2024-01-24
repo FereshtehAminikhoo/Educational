@@ -175,10 +175,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        \RolePermissions\Providers\RolePermissionsServiceProvider::class,
         \User\Providers\UserServiceProvider::class,
         \Dashboard\Providers\DashboardServiceProvider::class,
         \Category\Providers\CategoryServiceProvider::class,
-        \RolePermissions\Providers\RolePermissionsServiceProvider::class,
         \Course\Providers\CourseServiceProvider::class,
         \Media\Providers\MediaServiceProvider::class,
         \Common\Providers\CommonServiceProvider::class,
