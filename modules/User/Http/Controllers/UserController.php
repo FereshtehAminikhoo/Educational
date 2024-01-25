@@ -4,9 +4,11 @@ namespace User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Media\Services\MediaFileService;
-use Responses\AjaxResponses;
+use Common\Responses\AjaxResponses;
 use RolePermissions\Repositories\RoleRepo;
 use User\Http\Requests\AddRoleRequest;
+use User\Http\Requests\UpdateProfileInformationRequest;
+use User\Http\Requests\UpdateUserPhotoRequest;
 use User\Http\Requests\UpdateUserRequest;
 use User\Models\User;
 use User\Repositories\UserRepo;
@@ -56,6 +58,28 @@ class UserController extends Controller
         $this->repository->update($userId, $request);
         newFeedback();
         return redirect(route('users.index'));
+    }
+
+    public function updatePhoto(UpdateUserPhotoRequest $request)
+    {
+        $this->authorize('editProfile', User::class);
+        $media = MediaFileService::upload($request->file('userPhoto'));
+        if(auth()->user()->image) auth()->user()->image->delete();
+        auth()->user()->image_id = $media->id;
+        auth()->user()->save();
+        newFeedback();
+        return back();
+    }
+
+    public function profile()
+    {
+        $this->authorize('editProfile', User::class);
+        return view('User::Admin.profile');
+    }
+
+    public function updateProfile(UpdateProfileInformationRequest $request)
+    {
+        $this->authorize('editProfile', User::class);
     }
 
     public function destroy($userId)

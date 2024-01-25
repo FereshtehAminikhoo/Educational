@@ -34,6 +34,11 @@ class UserPolicy
         }
     }
 
+    public function editProfie($user)
+    {
+        if(auth()->check()) return true;
+    }
+
     public function delete($user)
     {
         if($user->hasPermissionTo(Permission::PERMISSION_MANAGE_USERS)){
