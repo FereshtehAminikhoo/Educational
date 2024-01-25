@@ -11,10 +11,13 @@
                     <thead role="rowgroup">
                     <tr role="row" class="title-row">
                         <th>شناسه</th>
-                        <th>نام</th>
+                        <th>نام و نام خانوادگی</th>
                         <th>ایمیل</th>
-                        <th>نقش کاربری</th>
-                        <th>وضعیت تایید</th>
+                        <th>شماره موبایل</th>
+                        <th>سطح کاربری</th>
+                        <th>تاریخ عضویت</th>
+                        <th>آی پی</th>
+                        <th>وضعیت حساب</th>
                         <th>عملیات</th>
                     </tr>
                     </thead>
@@ -25,17 +28,20 @@
                        <!-- <td width="80"><img src="" alt="" width="80"></td> -->
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>{{$user->mobile}}</td>
                         <td>
                             <a href="">
                                 <ul>
                                     @foreach($user->roles as $userRole)
-                                        <li class="delete-list-item">{{$userRole->name}} <a href="" onclick="deleteItem(event, '{{route('users.removeRole', ['user' => $user->id, 'role' => $userRole->name])}}', 'li')" class="item-delete mlg-15" title="حذف"></a></li>
+                                        <li class="delete-list-item">@lang($userRole->name) <a href="" onclick="deleteItem(event, '{{route('users.removeRole', ['user' => $user->id, 'role' => $userRole->name])}}', 'li')" class="item-delete mlg-15" title="حذف"></a></li>
                                     @endforeach
                                     <li><a href="#select-role" rel="modal:open" data-modal onclick="setFormAction({{$user->id}})">افزودن نقش کاربری</a></li>
                                 </ul>
                             </a>
                         </td>
-                        <td class="confirmation_status">{{$user->hasVerifiedEmail() ? 'تایید شده' : 'تایید نشده'}}</td>
+                        <td>{{$user->created_at}}</td>
+                        <td>{{$user->ip}}</td>
+                        <td class="confirmation_status">{!! $user->hasVerifiedEmail() ? '<span class="text-success">تایید شده</span>' : '<span class="text-error">تایید نشده</span>' !!}</td>
                         <td>
                             <a href="" onclick="deleteItem(event, '{{route('users.destroy', $user->id)}}')" class="item-delete mlg-15" title="حذف"></a>
                             <a href="{{route('users.edit', $user->id)}}" class="item-edit mlg-15" title="ویرایش"></a>
