@@ -182,7 +182,6 @@ return [
         \Category\Providers\CategoryServiceProvider::class,
         \Course\Providers\CourseServiceProvider::class,
         \Media\Providers\MediaServiceProvider::class,
-        \Common\Providers\CommonServiceProvider::class,
 
     ],
 
