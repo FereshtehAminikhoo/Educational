@@ -4,11 +4,11 @@ namespace Course\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Category\Repositories\CategoryRepo;
-use Common\Responses\AjaxResponses;
 use Course\Http\Requests\CourseRequest;
 use Course\Models\Course;
 use Course\Repositories\CourseRepo;
 use Media\Services\MediaFileService;
+use Responses\AjaxResponses;
 use User\Repositories\UserRepo;
 
 class CourseController extends Controller

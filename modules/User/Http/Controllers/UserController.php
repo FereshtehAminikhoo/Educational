@@ -3,8 +3,8 @@
 namespace User\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Common\Responses\AjaxResponses;
 use Media\Services\MediaFileService;
+use Responses\AjaxResponses;
 use RolePermissions\Repositories\RoleRepo;
 use User\Http\Requests\AddRoleRequest;
 use User\Http\Requests\UpdateUserRequest;
