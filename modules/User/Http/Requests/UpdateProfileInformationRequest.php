@@ -29,18 +29,18 @@ class UpdateProfileInformationRequest extends FormRequest
             'name' => 'required|min:3|max:190',
             'email' => 'required|email|min:3|max:190|unique:users,email,' . auth()->id(),
             'username' => 'nullable|min:3|max:190|unique:users,username,' . auth()->id(),
-            'mobile' => 'nullable|unique:users,mobile,' . request()->route('user'),
+            'mobile' => 'nullable|unique:users,mobile,' . auth()->id(),
             'password' => ['nullable', new ValidPassword()],
         ];
 
         if(auth()->user()->hasPermissionTo(Permission::PERMISSION_TEACH)){
-            $rules = [
-                'username' => 'required|min:3|max:190|unique:users,username,' . auth()->id(),
+            $rules += [
                 'card_number' => 'required|string|size:16',
                 'shaba' => 'required|size:24',
                 'headline' => 'required|min:3|max:60',
                 'bio' => 'required',
             ];
+            $rules['username'] = 'required|min:3|max:190|unique:users,username,' . auth()->id();
         }
 
         return $rules;
