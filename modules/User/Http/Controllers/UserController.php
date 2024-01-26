@@ -80,6 +80,9 @@ class UserController extends Controller
     public function updateProfile(UpdateProfileInformationRequest $request)
     {
         $this->authorize('editProfile', User::class);
+        $this->repository->updateProfile($request);
+        newFeedback();
+        return back();
     }
 
     public function destroy($userId)
