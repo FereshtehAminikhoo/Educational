@@ -33,6 +33,13 @@ Route::group([
     Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
 
+});
+
+
+Route::group([
+    'namespace'=>'User\Http\Controllers',
+    'middleware'=> ['web', 'auth']
+], function ($router) {
     //panel routes
     Route::post('/users/{user}/add/role', 'UserController@addRole')->name('users.addRole');
     Route::delete('/users/{user}/remove/{role}/role', 'UserController@removeRole')->name('users.removeRole');
@@ -42,6 +49,4 @@ Route::group([
     Route::post('/users/profile', 'UserController@updateProfile')->name('users.profile');
     Route::get('/users/profile/{username}', 'UserController@viewProfile')->name('users.viewProfile');
     Route::resource('/users', 'UserController');
-
-
 });
