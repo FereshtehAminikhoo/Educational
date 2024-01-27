@@ -8,7 +8,7 @@ use Course\Http\Requests\CourseRequest;
 use Course\Models\Course;
 use Course\Repositories\CourseRepo;
 use Media\Services\MediaFileService;
-use Responses\AjaxResponses;
+use Common\Responses\AjaxResponses;
 use User\Repositories\UserRepo;
 
 class CourseController extends Controller
@@ -73,6 +73,12 @@ class CourseController extends Controller
 
         $this->repository->update($id, $request);
         return redirect(route('courses.index'));
+    }
+
+    public function details($courseId)
+    {
+        $course = $this->repository->findById($courseId);
+        return view('Courses::details', compact('course'));
     }
 
     public function destroy($courseId)
