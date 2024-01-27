@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Category\Http\Requests\CategoryRequest;
 use Category\Models\Category;
 use Category\Repositories\CategoryRepo;
-use Responses\AjaxResponses;
+use Common\Responses\AjaxResponses;
 
 
 class CategoryController extends Controller
