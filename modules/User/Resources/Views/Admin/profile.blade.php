@@ -44,9 +44,9 @@
     </div>
 @endsection
 
-{{--@section('js')--}}
-{{--    <script src="/panel/js/tagsInput.js"></script>--}}
-{{--    <script>--}}
-{{--        @include('Common::layouts.feedbacks')--}}
-{{--    </script>--}}
-{{--@endsection--}}
+@section('js')
+    <script src="/panel/js/tagsInput.js"></script>
+    <script>
+        @include('Common::layouts.feedbacks')
+    </script>
+@endsection
