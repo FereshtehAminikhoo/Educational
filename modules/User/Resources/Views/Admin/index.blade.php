@@ -25,7 +25,6 @@
                     @foreach($users as $user)
                     <tr role="row" class="">
                         <td><a href="">{{$user->id}}</a></td>
-                       <!-- <td width="80"><img src="" alt="" width="80"></td> -->
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->mobile}}</td>
