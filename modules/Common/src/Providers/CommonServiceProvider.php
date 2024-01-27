@@ -8,7 +8,7 @@ class CommonServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->loadViewsFrom(__DIR__ . '/../Resources', 'Common');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'Common');
     }
 
 

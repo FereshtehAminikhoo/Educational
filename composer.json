@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "modules/common": "dev-main",
         "spatie/laravel-permission": "^5.11"
     },
     "require-dev": {
@@ -23,6 +24,12 @@
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "modules/Common/"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
@@ -32,7 +39,6 @@
             "RolePermissions\\": "modules/RolePermissions/",
             "Course\\": "modules/Course/",
             "Media\\": "modules/Media/",
-            "Common\\": "modules/Common/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
