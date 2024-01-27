@@ -6,6 +6,7 @@ return [
         'categories' => [],
         'role-permissions' => [],
         'users' => [],
-        'courses' => []
+        'courses' => [],
+        'user_information' => []
     ]
 ];
