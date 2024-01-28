@@ -28,6 +28,12 @@ class Season extends Model
     static $confirmationStatuses = [self::CONFIRMATION_STATUS_ACCEPTED, self::CONFIRMATION_STATUS_REJECTED, self::CONFIRMATION_STATUS_PENDING];
 
 
+    const STATUS_OPENED = 'opened';
+    const STATUS_LOCKED = 'locked';
+    static $statuses = [self::STATUS_OPENED, self::STATUS_LOCKED ];
+
+
+
     public function course()
     {
         return $this->belongsTo(Course::class, 'course_id', 'id');
