@@ -67,6 +67,6 @@ class UserRepo
             auth()->user()->password = bcrypt($request->password);
         }
 
-        auth()->save();
+        auth()->user()->save();
     }
 }
