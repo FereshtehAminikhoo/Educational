@@ -13,6 +13,8 @@
             <tr role="row" class="title-row">
                 <th class="p-r-90">شناسه</th>
                 <th>عنوان فصل</th>
+                <th>وضعیت فصل</th>
+                <th>وضعیت تایید</th>
                 <th>عملیات</th>
             </tr>
             </thead>
@@ -21,10 +23,17 @@
             <tr role="row" class="">
                 <td><a href="">{{$season->number}}</a></td>
                 <td><a href="">{{$season->title}}</a></td>
+                <td class="status">@lang($season->status)</td>
+                <td class="confirmation_status">@lang($season->confirmation_status)</td>
                 <td>
-                    <a href="" class="item-delete mlg-15"  title="حذف"></a>
-                    <a href="" class="item-reject mlg-15" title="رد"></a>
-                    <a href="" class="item-confirm mlg-15" title="تایید"></a>
+                    <a href="" onclick="deleteItem(event, '{{route('seasons.destroy', $season->id)}}')" class="item-delete mlg-15"  title="حذف"></a>
+                    <a href="" onclick="updateConfirmationStatus(event, '{{route('seasons.accept', $season->id)}}', 'آیا از تایید این آیتم اطمینان دارید؟', 'تایید شده')" class="item-confirm mlg-15" title="تایید"></a>
+                    <a href="" onclick="updateConfirmationStatus(event, '{{route('seasons.reject', $season->id)}}', 'آیا از رد این آیتم اطمینان دارید؟', 'رد شده')" class="item-reject mlg-15" title="رد"></a>
+                    @if($season->status == \Course\Models\Season::STATUS_OPENED)
+                        <a href="" onclick="updateConfirmationStatus(event, '{{route('seasons.lock', $season->id)}}', 'آیا از قفل کردن این آیتم اطمینان دارید؟', 'قفل شده', 'status')" class="item-lock mlg-15 text-error" title="قفل کردن"></a>
+                    @else
+                        <a href="" onclick="updateConfirmationStatus(event, '{{route('seasons.unlock', $season->id)}}', 'آیا از باز کردن این آیتم اطمینان دارید؟', 'باز', 'status')" class="item-lock mlg-15 text-success" title="باز کردن"></a>
+                    @endif
                     <a href="{{route('seasons.edit', $season->id)}}" class="item-edit " title="ویرایش"></a>
                 </td>
             </tr>
