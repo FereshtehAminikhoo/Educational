@@ -35,7 +35,7 @@ class UserServiceProvider extends ServiceProvider
         ]);
 
         $this->app->booted(function(){
-            config()->set('sidebar.items.user_information', [
+            config()->set('sidebar.items.user-information', [
                 "icon" => "i-user__inforamtion",
                 "title" => "اطلاعات کاربری",
                 "url" => route('users.profile'),
