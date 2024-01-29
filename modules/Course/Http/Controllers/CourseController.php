@@ -78,6 +78,7 @@ class CourseController extends Controller
     public function details($courseId)
     {
         $course = $this->repository->findById($courseId);
+        $this->authorize('details', $course);
         return view('Courses::details', compact('course'));
     }
 
