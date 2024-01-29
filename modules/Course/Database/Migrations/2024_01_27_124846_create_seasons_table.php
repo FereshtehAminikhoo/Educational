@@ -20,7 +20,7 @@ class CreateSeasonsTable extends Migration
             $table->string('title');
             $table->tinyInteger('number')->unsigned();
             $table->enum('confirmation_status', \Course\Models\Season::$confirmationStatuses)->default(\Course\Models\Season::CONFIRMATION_STATUS_PENDING);
-            $table->enum('status', \Course\Models\Season::$statuses);
+            $table->enum('status', \Course\Models\Season::$statuses)->default(\Course\Models\Season::STATUS_OPENED);
             $table->timestamps();
 
 
