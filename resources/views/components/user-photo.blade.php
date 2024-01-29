@@ -2,7 +2,7 @@
     @csrf
     <div class="profile__info border cursor-pointer text-center">
         <div class="avatar__img">
-            <img src="{{auth()->user()->image->thumb}}" class="avatar___img">
+            <img src="{{auth()->user()->thumb}}" alt="" class="avatar___img">
             <input type="file" name="userPhoto" accept="image/*" class="hidden avatar-img__input"
                    onchange="this.form.submit()">
             <div class="v-dialog__container" style="display: block;"></div>
