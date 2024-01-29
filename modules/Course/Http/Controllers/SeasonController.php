@@ -17,7 +17,7 @@ class SeasonController extends Controller
     public function __construct(SeasonRepo $seasonRepo, CourseRepo $courseRepo)
     {
         $this->repository = $seasonRepo;
-        $this->repository_course = $seasonRepo;
+        $this->repository_course = $courseRepo;
     }
 
 
