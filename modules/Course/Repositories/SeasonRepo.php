@@ -2,9 +2,8 @@
 
 namespace Course\Repositories;
 
-use Course\Models\Course;
 use Course\Models\Season;
-use Illuminate\Support\Str;
+
 
 class SeasonRepo
 {
