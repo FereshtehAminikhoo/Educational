@@ -3,11 +3,14 @@
 namespace Course\Providers;
 
 use Course\Models\Course;
+use Course\Models\Season;
 use Course\Policies\CoursePolicy;
+use Course\Policies\SeasonPolicy;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use RolePermissions\Database\Seeds\RolePermissionTableSeeder;
+use RolePermissions\Models\Permission;
 
 class CourseServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,7 @@ class CourseServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'Courses');
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
         Gate::policy(Course::class, CoursePolicy::class);
+        Gate::policy(Season::class, SeasonPolicy::class);
     }
 
 
@@ -28,6 +32,7 @@ class CourseServiceProvider extends ServiceProvider
             "icon" => "i-courses",
             "title" => "دوره ها",
             "url" => route('courses.index'),
+            "permission" => Permission::PERMISSION_MANAGE_COURSES,
         ]);
     }
 
