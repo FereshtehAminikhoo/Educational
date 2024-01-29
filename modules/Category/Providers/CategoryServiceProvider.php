@@ -6,6 +6,7 @@ use Category\Models\Category;
 use Category\Policies\CategoryPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use RolePermissions\Models\Permission;
 
 class CategoryServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class CategoryServiceProvider extends ServiceProvider
             "icon" => "i-categories",
             "title" => "دسته بندی ها",
             "url" => route('categories.index'),
+            "permission" => Permission::PERMISSION_MANAGE_CATEGORIES,
         ]);
     }
 

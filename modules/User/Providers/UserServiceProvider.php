@@ -5,6 +5,7 @@ namespace User\Providers;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use RolePermissions\Models\Permission;
 use User\Database\Seeds\UsersTableSeeder;
 use User\Http\Middlewares\StoreUserIp;
 use User\Models\User;
@@ -32,6 +33,7 @@ class UserServiceProvider extends ServiceProvider
             "icon" => "i-users",
             "title" => "کاربران",
             "url" => route('users.index'),
+            "permission" => Permission::PERMISSION_MANAGE_USERS,
         ]);
 
         $this->app->booted(function(){
