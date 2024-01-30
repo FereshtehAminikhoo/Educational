@@ -24,7 +24,7 @@ class CreateLessonsTable extends Migration
             $table->boolean('free')->default(false);
             $table->longText('body')->nullable();
             $table->tinyInteger('time')->unsigned()->nullable();
-            $table->integer('priority')->unsigned()->nullable();
+            $table->integer('number')->unsigned()->nullable();
             $table->enum('confirmation_status', \Course\Models\Lesson::$confirmationStatuses)->default(\Course\Models\Lesson::CONFIRMATION_STATUS_PENDING);
             $table->enum('status', \Course\Models\Lesson::$statuses)->default(\Course\Models\Lesson::STATUS_OPENED);
             $table->timestamps();
