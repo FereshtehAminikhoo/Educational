@@ -7,6 +7,7 @@ use Course\Http\Requests\LessonRequest;
 use Course\Repositories\CourseRepo;
 use Course\Repositories\LessonRepo;
 use Course\Repositories\SeasonRepo;
+use Media\Services\MediaFileService;
 
 class LessonController extends Controller
 {
@@ -31,8 +32,11 @@ class LessonController extends Controller
         return view('Courses::lessons.create', compact('seasons', 'course'));
     }
 
-    public function store(LessonRequest $request)
+    public function store($courseId, LessonRequest $request)
     {
-        $this->repository->store($request);
+        $request->request->add(['media_id' => MediaFileService::upload($request->file('lesson_file'))->id]);
+        $this->repository->store($courseId, $request);
+        newFeedback();
+        return redirect(route('courses.details', $courseId));
     }
 }
