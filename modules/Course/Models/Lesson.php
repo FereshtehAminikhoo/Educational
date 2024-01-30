@@ -4,6 +4,8 @@ namespace Course\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Media\Models\Media;
+use User\Models\User;
 
 class Lesson extends Model
 {
@@ -23,7 +25,7 @@ class Lesson extends Model
         'free',
         'body',
         'time',
-        'priority',
+        'number',
         'confirmation_status',
         'status',
     ];
@@ -40,4 +42,23 @@ class Lesson extends Model
     static $statuses = [self::STATUS_OPENED, self::STATUS_LOCKED ];
 
 
+    public function season()
+    {
+        return $this->belongsTo(Season::class, 'season_id', 'id');
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function media()
+    {
+        return $this->belongsTo(Media::class, 'media_id', 'id');
+    }
 }

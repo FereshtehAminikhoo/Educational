@@ -3,6 +3,7 @@
 namespace User\Models;
 
 use Course\Models\Course;
+use Course\Models\Lesson;
 use Course\Models\Season;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -106,6 +107,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function seasons()
     {
         return $this->hasMany(Season::class);
+    }
+
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
     }
 
     public function profilePath()
