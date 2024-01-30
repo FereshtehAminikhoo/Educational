@@ -7,6 +7,8 @@ use Category\Repositories\CategoryRepo;
 use Course\Http\Requests\CourseRequest;
 use Course\Models\Course;
 use Course\Repositories\CourseRepo;
+use Course\Repositories\LessonRepo;
+use Course\Repositories\SeasonRepo;
 use Media\Services\MediaFileService;
 use Common\Responses\AjaxResponses;
 use User\Repositories\UserRepo;
@@ -16,15 +18,18 @@ class CourseController extends Controller
     /**
      * @var CategoryRepo
      */
+    private $repository;
     private $repository_user;
     private $repository_category;
-    private $repository;
+    private $repository_lesson;
 
-    public function __construct(UserRepo $userRepo,CategoryRepo $categoryRepo, CourseRepo $courseRepo)
+
+    public function __construct(UserRepo $userRepo,CategoryRepo $categoryRepo, CourseRepo $courseRepo, LessonRepo $lessonRepo)
     {
+        $this->repository = $courseRepo;
         $this->repository_user = $userRepo;
         $this->repository_category = $categoryRepo;
-        $this->repository = $courseRepo;
+        $this->repository_lesson = $lessonRepo;
     }
 
 
@@ -79,7 +84,8 @@ class CourseController extends Controller
     {
         $course = $this->repository->findById($courseId);
         $this->authorize('details', $course);
-        return view('Courses::details', compact('course'));
+        $lessons = $this->repository_lesson->paginate();
+        return view('Courses::details', compact('course', 'lessons'));
     }
 
     public function destroy($courseId)
