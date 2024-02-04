@@ -2,17 +2,21 @@
 
 namespace Media\Services;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Media\Contracts\FileServiceContract;
+use Media\Models\Media;
 
-class VideoFileService
+class VideoFileService implements FileServiceContract
 {
-    public static function upload($file)
+    public static function upload(UploadedFile $file, $filename, $dir) :array
     {
-        $filename = uniqid();
-        $extension = $file->getClientOriginalExtension();
-        $dir = 'private\\';
-        Storage::putFileAs($dir, $file, $filename . '.' . $extension);
-        return ['video' => $dir . $filename . '.' . $extension];
+        Storage::putFileAs($dir, $file, $filename . '.' . $file->getClientOriginalExtension());
+        return ['video' => $dir . $filename . '.' . $file->getClientOriginalExtension()];
     }
 
+    public static function delete(Media $media)
+    {
+        // TODO: Implement delete() method.
+    }
 }
