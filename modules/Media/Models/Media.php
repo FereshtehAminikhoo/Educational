@@ -17,7 +17,8 @@ class Media extends Model
         'user_id',
         'files',
         'type',
-        'filename'
+        'filename',
+        'is_private',
     ];
 
 
