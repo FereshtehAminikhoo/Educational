@@ -3,6 +3,7 @@
 namespace Course\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Common\Responses\AjaxResponses;
 use Course\Http\Requests\LessonRequest;
 use Course\Repositories\CourseRepo;
 use Course\Repositories\LessonRepo;
@@ -38,5 +39,15 @@ class LessonController extends Controller
         $this->repository->store($courseId, $request);
         newFeedback();
         return redirect(route('courses.details', $courseId));
+    }
+
+    public function destroy($courseId, $lessonId)
+    {
+        $lesson = $this->repository->findById($lessonId);
+        if($lesson->media){
+            $lesson->media->delete();
+        }
+        $lesson->delete();
+        return AjaxResponses::SuccessResponse();
     }
 }
