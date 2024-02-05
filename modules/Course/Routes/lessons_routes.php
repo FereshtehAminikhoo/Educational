@@ -5,4 +5,6 @@ Route::group(['namespace' => 'Course\Http\Controllers', 'middleware' => ['web', 
     $router->post('/courses/{course}/lessons/store', 'LessonController@store')->name('lessons.store');
     $router->delete('/courses/{course}/lessons/{lesson}/delete', 'LessonController@destroy')->name('lessons.destroy');
     $router->delete('/courses/{course}/lessons/deleteMultiple', 'LessonController@destroyMultiple')->name('lessons.destroyMultiple');
+    $router->patch('/lessons/{lesson}/accept', 'LessonController@accept')->name('lessons.accept');
+    $router->patch('/lessons/{lesson}/reject', 'LessonController@reject')->name('lessons.reject');
 });

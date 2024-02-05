@@ -5,6 +5,7 @@ namespace Course\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Common\Responses\AjaxResponses;
 use Course\Http\Requests\LessonRequest;
+use Course\Models\Lesson;
 use Course\Repositories\CourseRepo;
 use Course\Repositories\LessonRepo;
 use Course\Repositories\SeasonRepo;
@@ -49,6 +50,18 @@ class LessonController extends Controller
             $lesson->media->delete();
         }
         $lesson->delete();
+        return AjaxResponses::SuccessResponse();
+    }
+
+    public function accept($lessonId)
+    {
+        $this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_ACCEPTED);
+        return AjaxResponses::SuccessResponse();
+    }
+
+    public function reject($lessonId)
+    {
+        $this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_REJECTED);
         return AjaxResponses::SuccessResponse();
     }
 
