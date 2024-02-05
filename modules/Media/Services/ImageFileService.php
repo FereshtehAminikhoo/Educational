@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Media\Contracts\FileServiceContract;
 
-class ImageFileService implements FileServiceContract
+class ImageFileService extends DefaultFileService implements FileServiceContract
 {
     protected static $sizes = ['300', '600'];
 
@@ -33,11 +33,5 @@ class ImageFileService implements FileServiceContract
         return $imgs;
     }
 
-    public static function delete($media)
-    {
-        foreach($media->files as $file){
-            Storage::delete('public\\' . $file);
-        }
-    }
 
 }
