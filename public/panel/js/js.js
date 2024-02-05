@@ -140,7 +140,7 @@ $('.checkedAll').on('click', function (e) {
     }
 });
 
-jQuery('.delete-btn').on('click', function (e) {
+function deleteMultiple(route){
     var allVals = [];
     $(".sub-checkbox:checked").each(function () {
         allVals.push($(this).attr('data-id'));
@@ -154,15 +154,17 @@ jQuery('.delete-btn').on('click', function (e) {
         var check = confirm(WRN_PROFILE_DELETE);
         if (check == true) {
             //for server side
-            /*
-            var join_selected_values = allVals.join(",");
+            $('<form action="'+ route +'" method="post">' +
+                '<input type="hidden" name="_token" value="'+ $('meta[name="_token"]').attr('content') +'">' +
+                '<input type="hidden" name="_method" value="delete">' +
+                '<input type="hidden" name="ids" value="'+ allVals +'">' +
+                '</form>').appendTo('body').submit();
 
-            $.ajax({
-
+            /*$.ajax({
                 type: "POST",
                 url: "delete.php",
                 cache:false,
-                data: 'ids='+join_selected_values,
+                data: {ids: allVals},
                 success: function(response)
                 {
                     $("#loading").hide();
@@ -178,7 +180,7 @@ jQuery('.delete-btn').on('click', function (e) {
 
         }
     }
-});
+};
 
 $('.course__detial .item-delete').on('click', function (e) {
     WRN_PROFILE_DELETE = "آیا مطمئن هستید که می خواهید این سطر را حذف کنید؟";
