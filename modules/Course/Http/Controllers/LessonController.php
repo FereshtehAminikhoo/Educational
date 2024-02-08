@@ -43,6 +43,19 @@ class LessonController extends Controller
         return redirect(route('courses.details', $courseId));
     }
 
+    public function edit($courseId, $lessonId)
+    {
+        $lesson = $this->repository->findById($lessonId);
+        $seasons = $this->repository_season->getCourseSeasons($courseId);
+        $course = $this->repository_course->findById($courseId);
+        return view('Courses::lessons.edit', compact('lesson', 'seasons', 'course'));
+    }
+
+    public function update($courseId, $lessonId)
+    {
+
+    }
+
     public function destroy($courseId, $lessonId)
     {
         $lesson = $this->repository->findById($lessonId);
