@@ -55,14 +55,38 @@ class LessonController extends Controller
 
     public function accept($lessonId)
     {
-        $this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_ACCEPTED);
-        return AjaxResponses::SuccessResponse();
+        if($this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_ACCEPTED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailResponse();
     }
 
     public function reject($lessonId)
     {
-        $this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_REJECTED);
-        return AjaxResponses::SuccessResponse();
+        if($this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_REJECTED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailResponse();
+    }
+
+    public function lock($lessonId)
+    {
+        if($this->repository->updateStatus($lessonId, Lesson::STATUS_LOCKED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailResponse();
+    }
+
+    public function unlock($lessonId)
+    {
+        if($this->repository->updateStatus($lessonId, Lesson::STATUS_OPENED)){
+            return AjaxResponses::SuccessResponse();
+        }
+
+        return AjaxResponses::FailResponse();
     }
 
     public function destroyMultiple(Request $request)
