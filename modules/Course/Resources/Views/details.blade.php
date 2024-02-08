@@ -56,7 +56,7 @@
                         </td>
                         <td>{{$lesson->free ? 'همه' : 'شرکت کنندگان'}}</td>
                         <td>
-                            <a href="" onclick="deleteItem(event, '{{route('$lessons.destroy',[$course->id, $lesson->id])}}')" class="item-delete mlg-15"  title="حذف"></a>
+                            <a href="" onclick="deleteItem(event, '{{route('lessons.destroy',[$course->id, $lesson->id])}}')" class="item-delete mlg-15"  title="حذف"></a>
                             <a href="" onclick="updateConfirmationStatus(event, '{{route('lessons.accept', $lesson->id)}}', 'آیا از تایید این آیتم اطمینان دارید؟', 'تایید شده')" class="item-confirm mlg-15" title="تایید"></a>
                             <a href="" onclick="updateConfirmationStatus(event, '{{route('lessons.reject', $lesson->id)}}', 'آیا از رد این آیتم اطمینان دارید؟', 'رد شده')" class="item-reject mlg-15" title="رد"></a>
                             <a href="" class="item-lock mlg-15" title="قفل "></a>
