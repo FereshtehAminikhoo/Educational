@@ -16,7 +16,7 @@ class LessonRepo
             'time' => $values->time,
             'number' => $this->generateNumber($values->number, $courseId),
             'season_id' => $values->season_id,
-            'free' => $values->free,
+            'is_free' => $values->is_free,
             'media_id' => $values->media_id,
             'course_id' => $courseId,
             'user_id' => auth()->id(),

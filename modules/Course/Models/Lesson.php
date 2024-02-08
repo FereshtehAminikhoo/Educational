@@ -22,7 +22,7 @@ class Lesson extends Model
         'media_id',
         'title',
         'slug',
-        'free',
+        'is_free',
         'body',
         'time',
         'number',
