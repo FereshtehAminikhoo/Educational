@@ -5,6 +5,7 @@ namespace Media\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Media\Contracts\FileServiceContract;
+use Media\Models\Media;
 
 class ZipFileService extends DefaultFileService implements FileServiceContract
 {
@@ -14,4 +15,8 @@ class ZipFileService extends DefaultFileService implements FileServiceContract
         return ['zip' => $filename . '.' . $file->getClientOriginalExtension()];
     }
 
+    public static function thumb(Media $media)
+    {
+        return url('/img/zip-thumb.jpg');
+    }
 }

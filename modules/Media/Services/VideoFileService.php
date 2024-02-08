@@ -5,6 +5,7 @@ namespace Media\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Media\Contracts\FileServiceContract;
+use Media\Models\Media;
 
 class VideoFileService extends DefaultFileService implements FileServiceContract
 {
@@ -17,4 +18,8 @@ class VideoFileService extends DefaultFileService implements FileServiceContract
         return ['video' => $filename . '.' . $extension];
     }
 
+    public static function thumb(Media $media)
+    {
+        return url('/img/video-thumb.png');
+    }
 }
