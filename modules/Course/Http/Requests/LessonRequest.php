@@ -7,6 +7,7 @@ use Course\Rules\ValidSeason;
 use Course\Rules\ValidTeacher;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Media\Services\MediaFileService;
 
 class LessonRequest extends FormRequest
 {
@@ -37,10 +38,9 @@ class LessonRequest extends FormRequest
             'lesson_file' => 'required|file|mimes:avi,mkv,mp4,zip,rar',
         ];
 
-        /*if(request()->method === 'PATCH'){
-            $rules['slug'] = 'required|min:3|max:190|unique:courses,slug,' . request()->route('course');
-            $rules['image'] = 'nullable|mimes:jpg,png,jpeg';
-        }*/
+        if(request()->method === 'PATCH'){
+            $rules['lesson_file'] = 'nullable|file|mimes:' . MediaFileService::getExtensions();
+        }
 
         return $rules;
     }
