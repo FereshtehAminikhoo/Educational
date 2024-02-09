@@ -36,19 +36,16 @@ class LessonRepo
         return Lesson::findOrFail($id);
     }
 
-    public function update($id, $values)
+    public function update($id, $values, $courseId)
     {
         return Lesson::where('id', $id)->update([
             'title' => $values->title,
-            'slug' => Str::slug($values->slug),
-            'number' => $values->number,
-            'price' => $values->price,
-            'percent' => $values->percent,
-            'teacher_id' => $values->teacher_id,
-            'type' => $values->type,
-            'status' => $values->status,
-            'category_id' => $values->category_id,
-            'banner_id' => $values->banner_id,
+            'slug' => $values->slug ?  Str::slug($values->slug) : Str::slug($values->title),
+            'time' => $values->time,
+            'number' => $this->generateNumber($values->number, $courseId),
+            'season_id' => $values->season_id,
+            'is_free' => $values->is_free,
+            'media_id' => $values->media_id,
             'body' => $values->body,
         ]);
     }
