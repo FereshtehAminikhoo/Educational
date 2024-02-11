@@ -126,4 +126,27 @@ class LessonController extends Controller
         newFeedback();
         return back();
     }
+
+    public function acceptAll($courseId)
+    {
+        $this->repository->acceptAll($courseId);
+        newFeedback();
+        return back();
+    }
+
+    public function acceptMultiple(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        $this->repository->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_ACCEPTED);
+        newFeedback();
+        return back();
+    }
+
+    public function rejectMultiple(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        $this->repository->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_REJECTED);
+        newFeedback();
+        return back();
+    }
 }

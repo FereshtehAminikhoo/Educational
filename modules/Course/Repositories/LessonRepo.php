@@ -26,9 +26,9 @@ class LessonRepo
         ]);
     }
 
-    public function paginate()
+    public function paginate($courseId)
     {
-        return Lesson::orderBy('number')->paginate();
+        return Lesson::where('course_id', $courseId)->orderBy('number')->paginate();
     }
 
     public function findById($id)
@@ -52,6 +52,9 @@ class LessonRepo
 
     public function updateConfirmationStatus($id, string $status)
     {
+        if(is_array($id)){
+            return Lesson::query()->whereIn('id', $id)->update(['confirmation_status' => $status]);
+        }
         return Lesson::where('id', $id)->update(['confirmation_status' => $status]);
     }
 
@@ -59,6 +62,12 @@ class LessonRepo
     {
         return Lesson::where('id', $id)->update(['status' => $status]);
     }
+
+    public function acceptAll($courseId)
+    {
+        return Lesson::where('course_id', $courseId)->update(['confirmation_status' => Lesson::CONFIRMATION_STATUS_ACCEPTED]);
+    }
+
 
 
 
