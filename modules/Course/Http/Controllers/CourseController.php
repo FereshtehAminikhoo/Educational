@@ -84,7 +84,7 @@ class CourseController extends Controller
     {
         $course = $this->repository->findById($courseId);
         $this->authorize('details', $course);
-        $lessons = $this->repository_lesson->paginate();
+        $lessons = $this->repository_lesson->paginate($courseId);
         return view('Courses::details', compact('course', 'lessons'));
     }
 
