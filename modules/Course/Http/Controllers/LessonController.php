@@ -5,6 +5,7 @@ namespace Course\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Common\Responses\AjaxResponses;
 use Course\Http\Requests\LessonRequest;
+use Course\Models\Course;
 use Course\Models\Lesson;
 use Course\Repositories\CourseRepo;
 use Course\Repositories\LessonRepo;
@@ -30,13 +31,16 @@ class LessonController extends Controller
 
     public function create($courseId)
     {
-        $seasons = $this->repository_season->getCourseSeasons($courseId);
         $course = $this->repository_course->findById($courseId);
+        $this->authorize('createLesson', $course);
+        $seasons = $this->repository_season->getCourseSeasons($courseId);
         return view('Courses::lessons.create', compact('seasons', 'course'));
     }
 
     public function store($courseId, LessonRequest $request)
     {
+        $course = $this->repository_course->findById($courseId);
+        $this->authorize('createLesson', $course);
         $request->request->add(['media_id' => MediaFileService::privateUpload($request->file('lesson_file'))->id]);
         $this->repository->store($courseId, $request);
         newFeedback();
@@ -46,6 +50,7 @@ class LessonController extends Controller
     public function edit($courseId, $lessonId)
     {
         $lesson = $this->repository->findById($lessonId);
+        $this->authorize('edit', $lesson);
         $seasons = $this->repository_season->getCourseSeasons($courseId);
         $course = $this->repository_course->findById($courseId);
         return view('Courses::lessons.edit', compact('lesson', 'seasons', 'course'));
@@ -54,6 +59,7 @@ class LessonController extends Controller
     public function update($courseId, $lessonId, LessonRequest $request)
     {
         $lesson = $this->repository->findById($lessonId);
+        $this->authorize('edit', $lesson);
         if($request->hasFile('lesson_file')){
             if($lesson->media)
                 $lesson->media->delete();
@@ -70,6 +76,7 @@ class LessonController extends Controller
     public function destroy($courseId, $lessonId)
     {
         $lesson = $this->repository->findById($lessonId);
+        $this->authorize('delete', $lesson);
         if($lesson->media){
             $lesson->media->delete();
         }
@@ -79,6 +86,7 @@ class LessonController extends Controller
 
     public function accept($lessonId)
     {
+        $this->authorize('manage', Course::class);
         if($this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_ACCEPTED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -88,6 +96,7 @@ class LessonController extends Controller
 
     public function reject($lessonId)
     {
+        $this->authorize('manage', Course::class);
         if($this->repository->updateConfirmationStatus($lessonId, Lesson::CONFIRMATION_STATUS_REJECTED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -97,6 +106,7 @@ class LessonController extends Controller
 
     public function lock($lessonId)
     {
+        $this->authorize('manage', Course::class);
         if($this->repository->updateStatus($lessonId, Lesson::STATUS_LOCKED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -106,6 +116,7 @@ class LessonController extends Controller
 
     public function unlock($lessonId)
     {
+        $this->authorize('manage', Course::class);
         if($this->repository->updateStatus($lessonId, Lesson::STATUS_OPENED)){
             return AjaxResponses::SuccessResponse();
         }
@@ -118,6 +129,7 @@ class LessonController extends Controller
         $ids = explode(',', $request->ids);
         foreach($ids as $id){
             $lesson = $this->repository->findById($id);
+            $this->authorize('delete', $lesson);
             if($lesson->media){
                 $lesson->media->delete();
             }
@@ -129,6 +141,7 @@ class LessonController extends Controller
 
     public function acceptAll($courseId)
     {
+        $this->authorize('manage', Course::class);
         $this->repository->acceptAll($courseId);
         newFeedback();
         return back();
@@ -136,6 +149,7 @@ class LessonController extends Controller
 
     public function acceptMultiple(Request $request)
     {
+        $this->authorize('manage', Course::class);
         $ids = explode(',', $request->ids);
         $this->repository->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_ACCEPTED);
         newFeedback();
@@ -144,6 +158,7 @@ class LessonController extends Controller
 
     public function rejectMultiple(Request $request)
     {
+        $this->authorize('manage', Course::class);
         $ids = explode(',', $request->ids);
         $this->repository->updateConfirmationStatus($ids, Lesson::CONFIRMATION_STATUS_REJECTED);
         newFeedback();
