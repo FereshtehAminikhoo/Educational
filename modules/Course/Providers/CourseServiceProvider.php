@@ -3,8 +3,10 @@
 namespace Course\Providers;
 
 use Course\Models\Course;
+use Course\Models\Lesson;
 use Course\Models\Season;
 use Course\Policies\CoursePolicy;
+use Course\Policies\LessonPolicy;
 use Course\Policies\SeasonPolicy;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Gate;
@@ -24,6 +26,7 @@ class CourseServiceProvider extends ServiceProvider
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
         Gate::policy(Course::class, CoursePolicy::class);
         Gate::policy(Season::class, SeasonPolicy::class);
+        Gate::policy(Lesson::class, LessonPolicy::class);
     }
 
 
