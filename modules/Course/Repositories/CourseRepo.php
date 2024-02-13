@@ -12,6 +12,11 @@ class CourseRepo
         return Course::paginate(50);
     }
 
+    public function getCoursesByTeacherId(?int $id)
+    {
+        return Course::where('teacher_id', $id)->get();
+    }
+
     public function store($values)
     {
         return Course::create([

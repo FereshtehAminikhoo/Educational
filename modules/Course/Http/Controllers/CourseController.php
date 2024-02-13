@@ -11,6 +11,7 @@ use Course\Repositories\LessonRepo;
 use Course\Repositories\SeasonRepo;
 use Media\Services\MediaFileService;
 use Common\Responses\AjaxResponses;
+use RolePermissions\Models\Permission;
 use User\Repositories\UserRepo;
 
 class CourseController extends Controller
@@ -36,7 +37,12 @@ class CourseController extends Controller
     public function index()
     {
         $this->authorize('view', Course::class);
-        $courses = $this->repository->paginate();
+        if(auth()->user()->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES)){
+            $courses = $this->repository->paginate();
+        }else{
+            $courses = $this->repository->getCoursesByTeacherId(auth()->id());
+        }
+
         return view('Courses::index', compact('courses'));
     }
 
