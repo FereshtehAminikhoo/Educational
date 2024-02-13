@@ -22,7 +22,9 @@ class CoursePolicy
 
     public function view(User $user)
     {
-        return $user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES);
+        return
+            $user->hasPermissionTo(Permission::PERMISSION_MANAGE_COURSES) ||
+            $user->hasPermissionTo(Permission::PERMISSION_MANAGE_OWN_COURSES);
     }
 
     public function create($user)
