@@ -183,6 +183,7 @@ return [
         \Course\Providers\CourseServiceProvider::class,
         \Media\Providers\MediaServiceProvider::class,
         \Common\Providers\CommonServiceProvider::class,
+        \Front\Providers\FrontServiceProvider::class,
 
 
     ],
