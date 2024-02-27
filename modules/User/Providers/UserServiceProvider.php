@@ -3,6 +3,7 @@
 namespace User\Providers;
 
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use RolePermissions\Models\Permission;
@@ -20,6 +21,10 @@ class UserServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/Views', 'User');
         $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/Lang');
         $this->app['router']->pushMiddlewareToGroup('web', StoreUserIp::class);
+
+        Factory::guessFactoryNamesUsing(function(string $modelName){
+            return 'User\Database\Factories\\' . class_basename($modelName) . 'Factory';
+        });
 
         config()->set('auth.providers.users.model', User::class);
         DatabaseSeeder::$seeders[] = UsersTableSeeder::class;
