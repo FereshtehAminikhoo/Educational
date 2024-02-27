@@ -10,6 +10,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.7",
         "laravel/framework": "^8.75",
+        "laravel/legacy-factories": "*",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
@@ -39,6 +40,7 @@
             "RolePermissions\\": "modules/RolePermissions/",
             "Course\\": "modules/Course/",
             "Media\\": "modules/Media/",
+            "Front\\": "modules/Front/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
