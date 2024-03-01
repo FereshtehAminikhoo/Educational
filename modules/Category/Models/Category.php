@@ -36,5 +36,10 @@ class Category extends model
         return $this->hasMany(Course::class);
     }
 
+    public function path()
+    {
+        return route('categories.show', $this->id);
+    }
+
 
 }
