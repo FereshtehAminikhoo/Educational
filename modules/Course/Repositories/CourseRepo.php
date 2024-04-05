@@ -3,6 +3,7 @@
 namespace Course\Repositories;
 
 use Course\Models\Course;
+use Course\Models\Lesson;
 use Illuminate\Support\Str;
 
 class CourseRepo
@@ -66,5 +67,17 @@ class CourseRepo
     {
         return Course::where('id', $id)->update(['status' => $status]);
     }
+
+    public function latestCourses()
+    {
+        return Course::where('confirmation_status', Course::CONFIRMATION_STATUS_ACCEPTED)->latest()->take(8)->get();
+    }
+
+    public function getDuration($id)
+    {
+        return Lesson::where('course_id', $id)
+            ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)->sum('time');
+    }
+
 
 }

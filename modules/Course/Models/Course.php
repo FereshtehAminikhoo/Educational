@@ -3,6 +3,7 @@
 namespace Course\Models;
 
 use Category\Models\Category;
+use Course\Repositories\CourseRepo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Media\Models\Media;
@@ -68,5 +69,23 @@ class Course extends Model
     public function lessons()
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function getDuration()
+    {
+        return (new CourseRepo())->getDuration($this->id);
+    }
+
+    public function formattedDuration()
+    {
+        $duration = $this->getDuration();
+        $h = round($duration / 60) < 10 ? '0' . round($duration / 60) : round($duration / 60);
+        $m = ($duration % 60) < 10 ? '0' . ($duration % 60) : ($duration % 60);
+        return $h . ':' . $m . ':00';
+    }
+
+    public function getFormattedPrice()
+    {
+        return number_format($this->price);
     }
 }
