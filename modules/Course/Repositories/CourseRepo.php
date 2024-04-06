@@ -79,5 +79,11 @@ class CourseRepo
             ->where('confirmation_status', Lesson::CONFIRMATION_STATUS_ACCEPTED)->sum('time');
     }
 
+    public function getLessonsCount($id)
+    {
+        return Lesson::where('course_id', $id)
+            ->where('confirmation_status', Course::CONFIRMATION_STATUS_ACCEPTED)->count();
+    }
+
 
 }

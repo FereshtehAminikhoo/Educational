@@ -126,4 +126,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return '/panel/img/profile.jpg';
     }
+
+    public function hasAccessToCourse($courseId)
+    {
+        return false;
+    }
 }
