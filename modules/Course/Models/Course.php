@@ -88,4 +88,9 @@ class Course extends Model
     {
         return number_format($this->price);
     }
+
+    public function path()
+    {
+        return route('singleCourse', $this->id . '-' . $this->slug);
+    }
 }
